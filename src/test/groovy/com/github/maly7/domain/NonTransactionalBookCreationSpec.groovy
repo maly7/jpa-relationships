@@ -20,7 +20,7 @@ class NonTransactionalBookCreationSpec extends IntegrationSpec {
         Book bookWithAuthor = bookRepository.save(book)
 
         then: 'The book with the author has been persisted'
-        bookWithAuthor.authors.every { it.id }
+        bookWithAuthor.authors.every { it.id && it.name }
     }
 
     void 'Not setting the book on the BookAuthor should not persist the BookAuthor'() {
@@ -33,5 +33,16 @@ class NonTransactionalBookCreationSpec extends IntegrationSpec {
 
         then: 'Weird stuff happens'
         bookWithAuthor.authors.every { it.id && !it.name }
+    }
+
+    void 'A book with an author should be persisted at the same time'() {
+        when: 'Persisting a book with an author'
+        Book bookWithAuthor = bookRepository.save(new Book(title: 'A Storm of Swords', authors: [new BookAuthor(name: 'Author Person')]))
+
+        then: 'The book with the author has been persisted'
+        bookWithAuthor.id
+        bookWithAuthor.title
+        bookWithAuthor.authors.size() > 0
+        bookWithAuthor.authors.every { it.id && it.name }
     }
 }
