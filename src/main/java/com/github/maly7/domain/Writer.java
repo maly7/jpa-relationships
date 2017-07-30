@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Writer {
+public class Writer {
     private Long id;
     private String name;
 
