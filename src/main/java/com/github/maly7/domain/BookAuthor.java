@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "BOOK_AUTHOR", schema = "PUBLIC", catalog = "APP")
+@Table(name = "BOOK_AUTHOR")
 @PrimaryKeyJoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID")
 public class BookAuthor extends Writer {
     private Writer author;
@@ -24,7 +24,7 @@ public class BookAuthor extends Writer {
 
 
     @ManyToOne
-    @JoinColumn(name = "BOOK_ID", referencedColumnName = "ID", nullable = false)
+    @JoinColumn(name = "BOOK_ID", referencedColumnName = "ID")
     public Book getBook() {
         return book;
     }

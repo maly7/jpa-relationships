@@ -8,9 +8,4 @@ import spock.lang.Specification
 @SpringBootTest
 class IntegrationSpec extends Specification {
 
-    void 'startup works'() {
-        expect:
-        true
-    }
-
 }

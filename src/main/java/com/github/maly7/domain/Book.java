@@ -33,7 +33,7 @@ public class Book {
         this.title = title;
     }
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     public Set<BookAuthor> getAuthors() {
         return authors;
     }
