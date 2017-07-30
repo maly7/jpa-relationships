@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="persistenceUnit">
+        <class>com.github.maly7.domain.Book</class>
+        <class>com.github.maly7.domain.BookAuthor</class>
+        <class>com.github.maly7.domain.Writer</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:h2:C:/Users/paula/Documents/dev/h2/app"/>
+            <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
+        </properties>
+    </persistence-unit>
+</persistence>

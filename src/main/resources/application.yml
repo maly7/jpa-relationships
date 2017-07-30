@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:C:/Users/paula/Documents/dev/h2/app;MODE=MYSQL;IGNORECASE=TRUE;
+    data-username: sa
+    password: sa
+  jpa:
+    hibernate:
+      ddl-auto: validate
+flyway:
+  baseline-version: 0
+  enabled: true
+  out-of-order: false
+  locations: db/migration
