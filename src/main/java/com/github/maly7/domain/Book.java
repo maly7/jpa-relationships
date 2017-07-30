@@ -1,15 +1,19 @@
 package com.github.maly7.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class Book {
     private Long id;
     private String title;
-    private Collection<BookAuthor> bookAuthorsById;
+    private Set<BookAuthor> authors;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     public Long getId() {
         return id;
@@ -29,6 +33,15 @@ public class Book {
         this.title = title;
     }
 
+    @OneToMany(mappedBy = "book")
+    public Set<BookAuthor> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<BookAuthor> authors) {
+        this.authors = authors;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,7 +50,7 @@ public class Book {
 
         Book book = (Book) o;
 
-        return new org.apache.commons.lang3.builder.EqualsBuilder()
+        return new EqualsBuilder()
                 .append(id, book.id)
                 .append(title, book.title)
                 .isEquals();
@@ -45,18 +58,9 @@ public class Book {
 
     @Override
     public int hashCode() {
-        return new org.apache.commons.lang3.builder.HashCodeBuilder(17, 37)
+        return new HashCodeBuilder(17, 37)
                 .append(id)
                 .append(title)
                 .toHashCode();
-    }
-
-    @OneToMany(mappedBy = "bookByBookId")
-    public Collection<BookAuthor> getBookAuthorsById() {
-        return bookAuthorsById;
-    }
-
-    public void setBookAuthorsById(Collection<BookAuthor> bookAuthorsById) {
-        this.bookAuthorsById = bookAuthorsById;
     }
 }

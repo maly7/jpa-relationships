@@ -1,15 +1,18 @@
 package com.github.maly7.domain;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import javax.persistence.*;
 
 @Entity
-public class Writer {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Writer {
     private Long id;
     private String name;
 
-    @Basic
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     public Long getId() {
         return id;
@@ -37,7 +40,7 @@ public class Writer {
 
         Writer writer = (Writer) o;
 
-        return new org.apache.commons.lang3.builder.EqualsBuilder()
+        return new EqualsBuilder()
                 .append(id, writer.id)
                 .append(name, writer.name)
                 .isEquals();
@@ -45,7 +48,7 @@ public class Writer {
 
     @Override
     public int hashCode() {
-        return new org.apache.commons.lang3.builder.HashCodeBuilder(17, 37)
+        return new HashCodeBuilder(17, 37)
                 .append(id)
                 .append(name)
                 .toHashCode();
