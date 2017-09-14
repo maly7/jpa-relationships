@@ -57,4 +57,29 @@ class BookLabelSpec extends IntegrationSpec {
         labelIds.contains(BigInteger.valueOf(epic.id))
         !labelIds.contains(BigInteger.valueOf(fantasy.id))
     }
+
+    void 'we should be able to get books with a specific label'() {
+        given: 'A few books with labels'
+        Book epicFantasyBook = bookRepository.save(new Book(title: 'The Way of Kings'))
+        Book fantasyBook = bookRepository.save(new Book(title: 'Words of Radiance'))
+        Label fantasy = labelRepository.save(new Label(name: 'fantasy'))
+        Label epic = labelRepository.save(new Label(name: 'epic'))
+
+        epicFantasyBook.labels = [fantasy, epic]
+        fantasyBook.labels = [fantasy]
+        bookRepository.save([epicFantasyBook, fantasyBook])
+
+        when: 'Retrieving books with fantasy label'
+        Set<Book> fantasyBooks = bookRepository.findAllByLabelsContaining(fantasy)
+
+        then: 'We should get back both books'
+        fantasyBooks.containsAll([epicFantasyBook, fantasyBook])
+
+        when: 'Retrieving books with epic label'
+        Set<Book> epicBooks = bookRepository.findAllByLabelsContaining(epic)
+
+        then: 'We should get back only one book'
+        epicBooks.size() == 1
+        epicBooks.contains(epicFantasyBook)
+    }
 }
