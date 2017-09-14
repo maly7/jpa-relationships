@@ -45,6 +45,7 @@ public class Book {
 
     @ManyToMany
     @JoinTable(name = "book_label",
+            joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "label_id"))
     public Set<Label> getLabels() {
         return labels;
