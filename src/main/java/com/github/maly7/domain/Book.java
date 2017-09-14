@@ -11,6 +11,7 @@ public class Book {
     private Long id;
     private String title;
     private Set<BookAuthor> authors;
+    private Set<Label> labels;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +41,17 @@ public class Book {
 
     public void setAuthors(Set<BookAuthor> authors) {
         this.authors = authors;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "book_label",
+            inverseJoinColumns = @JoinColumn(name = "label_id"))
+    public Set<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(Set<Label> labels) {
+        this.labels = labels;
     }
 
     @Override
