@@ -30,6 +30,8 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-data-solr'
+    compile 'org.springframework.data:spring-data-solr:2.1.7.RELEASE' // Includes Child Doc fix
     compile 'org.flywaydb:flyway-core:4.2.0'
     compile 'org.apache.commons:commons-lang3:3.6'
     compile 'org.apache.commons:commons-collections4:4.1'
