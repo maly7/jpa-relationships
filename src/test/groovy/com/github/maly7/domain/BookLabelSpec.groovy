@@ -1,5 +1,7 @@
 package com.github.maly7.domain
 
+import com.github.maly7.data.jpa.BookRepository
+import com.github.maly7.data.jpa.LabelRepository
 import com.github.maly7.support.IntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.annotation.Rollback
